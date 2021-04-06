@@ -1,6 +1,7 @@
 import React from 'react';
 import { Text, View, StyleSheet, TouchableOpacity} from 'react-native';
 import {Ionicons} from '@expo/vector-icons';
+import * as Animatable from 'react-native-animatable';
 
 export default function TaskList({data}){
     return(
@@ -13,7 +14,7 @@ export default function TaskList({data}){
             <View>
                  <Text style={styles.teskText}>{data.task}</Text>
             </View>
-            
+
         </View>
     )      
 }

@@ -4,6 +4,7 @@ import {View, Text, StyleSheet, SafeAreaView, StatusBar,
 
 import { Ionicons} from '@expo/vector-icons';
 
+
 import TaskList from './src/components/TaskList';
 export default function App (){
   const [task, setTask] = useState([
