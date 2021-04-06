@@ -5,7 +5,11 @@ import * as Animatable from 'react-native-animatable';
 
 export default function TaskList({data}){
     return(
-        <View style={styles.container}>
+        <Animatable.View 
+        style={styles.container}
+        animation = "bounceIn"
+        useNativeDriver
+        >
 
             <TouchableOpacity>
                 <Ionicons name="md-checkmark-circle" size={30} color="#121212"/>
@@ -15,7 +19,7 @@ export default function TaskList({data}){
                  <Text style={styles.teskText}>{data.task}</Text>
             </View>
 
-        </View>
+        </Animatable.View>
     )      
 }
 

@@ -3,9 +3,11 @@ import {View, Text, StyleSheet, SafeAreaView, StatusBar,
   TouchableOpacity, FlatList} from 'react-native';
 
 import { Ionicons} from '@expo/vector-icons';
-
-
 import TaskList from './src/components/TaskList';
+import * as Animatable from 'react-native-animatable';
+
+const Animatablebtn = Animatable.createAnimatableComponent(TouchableOpacity);
+
 export default function App (){
   const [task, setTask] = useState([
     { key: 1, task:'Estudar React-Native 1'},
@@ -39,9 +41,14 @@ export default function App (){
  
 
   {/* Botão de add*/}
-        <TouchableOpacity style={styles.fab}>
+        <Animatablebtn 
+        style={styles.fab}
+        useNativeDriver
+        animation="bounceInUp"
+        duration={1500}
+        >
           <Ionicons name="ios-add" size={30} color="#fff"/>
-        </TouchableOpacity>
+        </Animatablebtn>
 
     </SafeAreaView>
 
