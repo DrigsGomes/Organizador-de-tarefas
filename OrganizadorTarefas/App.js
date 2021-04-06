@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {View, Text, StyleSheet, SafeAreaView, StatusBar, 
-  TouchableOpacity, FlatList} from 'react-native';
+  TouchableOpacity, FlatList, Modal} from 'react-native';
 
 import { Ionicons} from '@expo/vector-icons';
 import TaskList from './src/components/TaskList';
@@ -17,7 +17,9 @@ export default function App (){
     { key: 5, task:'Estudar React-Native 5'},
   ]);
 
-  
+  const [open, setOpen] = useState(false);
+
+
 
   return(
     <SafeAreaView style={styles.container}>
@@ -37,6 +39,9 @@ export default function App (){
   renderItem={ ({item})=> <TaskList data={item} /> }
   />
   
+  <Modal animationType='slide' transparent={false} visible={open}>
+
+  </Modal>
 
  
 
