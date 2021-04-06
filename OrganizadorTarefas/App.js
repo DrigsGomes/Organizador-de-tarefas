@@ -15,9 +15,9 @@ export default function App (){
     { key: 3, task:'Estudar React-Native 3'},
     { key: 4, task:'Estudar React-Native 4'},
     { key: 5, task:'Estudar React-Native 5'},
-
-
   ]);
+
+  
 
   return(
     <SafeAreaView style={styles.container}>
