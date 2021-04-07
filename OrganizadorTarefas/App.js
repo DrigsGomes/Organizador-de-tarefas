@@ -14,7 +14,6 @@ export default function App (){
     { key: 2, task:'Estudar React-Native 2'},
     { key: 3, task:'Estudar React-Native 3'},
     { key: 4, task:'Estudar React-Native 4'},
-    { key: 5, task:'Estudar React-Native 5'},
   ]);
 
   const [open, setOpen] = useState(false);
@@ -41,9 +40,22 @@ export default function App (){
   
   <Modal animationType='slide' transparent={false} visible={open}>
 
-  </Modal>
+  <SafeAreaView style={styles.modal}>
 
- 
+      <View style={styles.headModal}>
+      <TouchableOpacity onPress={ () => setOpen(false)}>
+        <Ionicons style={{marginLeft:5, marginRight:5}} name="md-arrow-back" size={30} color="#fff"/>
+      </TouchableOpacity>
+      <Text style={styles.titleModal}>Nova tarefa</Text>
+
+
+      </View>
+
+  </SafeAreaView>
+
+   
+
+  </Modal>
 
   {/* Botão de add*/}
         <Animatablebtn 
@@ -51,6 +63,7 @@ export default function App (){
         useNativeDriver
         animation="bounceInUp"
         duration={1500}
+        onPress={() => setOpen(true)}
         >
           <Ionicons name="ios-add" size={30} color="#fff"/>
         </Animatablebtn>
@@ -65,7 +78,7 @@ const styles = StyleSheet.create({
 
   container: {
     flex: 1,
-    backgroundColor: '#171d31',
+    backgroundColor: '#121d31',
   },
 
   title: {
@@ -73,7 +86,7 @@ const styles = StyleSheet.create({
     paddingBottom:10,
     fontSize:25,
     textAlign: 'center',
-    color: '#fff'
+    color: '#fff',
   },
   fab:{
     position: 'absolute',
@@ -93,6 +106,24 @@ const styles = StyleSheet.create({
       width:1,
       height:3,
     },
-  }
+  },
+
+  modal:{
+    flex:1,
+    backgroundColor:'#121d31',
+  },
+  
+  headModal:{
+    marginLeft:10,
+    marginTop:20,
+    flexBasis: 'row',
+    alignContent: 'center',
+  },
+
+  titleModal:{
+    marginLeft:15,
+    fontSize: 25,
+    color:'#fff',
+  },
 
 });
