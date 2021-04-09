@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {View, Text, StyleSheet, SafeAreaView, StatusBar, 
-  TouchableOpacity, FlatList, Modal} from 'react-native';
+  TouchableOpacity, FlatList, Modal, TextInput, TabBarIOS} from 'react-native';
 
 import { Ionicons} from '@expo/vector-icons';
 import TaskList from './src/components/TaskList';
@@ -9,14 +9,22 @@ import * as Animatable from 'react-native-animatable';
 const Animatablebtn = Animatable.createAnimatableComponent(TouchableOpacity);
 
 export default function App (){
-  const [task, setTask] = useState([
-    { key: 1, task:'Estudar React-Native 1'},
-    { key: 2, task:'Estudar React-Native 2'},
-    { key: 3, task:'Estudar React-Native 3'},
-    { key: 4, task:'Estudar React-Native 4'},
-  ]);
-
+  const [task, setTask] = useState([]);
   const [open, setOpen] = useState(false);
+  const [input, setInput] = useState('');
+
+  function handleAdd(){
+    if (input === '') return;
+
+    const data = {
+      key: input,
+      task: input,
+    };
+
+    setTask([...task, data]);
+    setOpen(false);
+    setInput('');
+  }
 
 
 
@@ -37,25 +45,38 @@ export default function App (){
   keyExtractor={ (item) => String(item.key) }
   renderItem={ ({item})=> <TaskList data={item} /> }
   />
-  
+
+  {/*Criando modal*/}
   <Modal animationType='slide' transparent={false} visible={open}>
 
-  <SafeAreaView style={styles.modal}>
+    <SafeAreaView style={styles.modal}>
 
-      <View style={styles.headModal}>
-      <TouchableOpacity onPress={ () => setOpen(false)}>
-        <Ionicons style={{marginLeft:5, marginRight:5}} name="md-arrow-back" size={30} color="#fff"/>
-      </TouchableOpacity>
-      <Text style={styles.titleModal}>Nova tarefa</Text>
-
-
+      <View style={styles.modalHeader}>
+        <TouchableOpacity onPress={() => setOpen(false)}>
+          <Ionicons style={{ marginLeft:5 , marginRight:5}} name="md-arrow-back" size={40} color="#FFF"/>
+        </TouchableOpacity>
+        <Text style={styles.modalTitle}> Nova tarefa</Text>
       </View>
 
-  </SafeAreaView>
+      <Animatable.View style={styles.modalBody} animation= "fadeInUp" useNativeDriver>
+        <TextInput
+        style={styles.input}
+        multiline={true}
+        placeholderTextColor='#747474'
+        autoCorrect={false}
+        placeholder =" O que precisa fazer hoje?"
+        value={input}
+        onChange={ (texto) => setInput(texto)}
+        />
 
-   
+        <TouchableOpacity style={styles.handleAdd} onPress={handleAdd}>
+          <Text style={styles.handleText}> Cadastrar </Text>
+        </TouchableOpacity>
 
+      </Animatable.View>
+    </SafeAreaView>
   </Modal>
+
 
   {/* Botão de add*/}
         <Animatablebtn 
@@ -63,7 +84,7 @@ export default function App (){
         useNativeDriver
         animation="bounceInUp"
         duration={1500}
-        onPress={() => setOpen(true)}
+        onPress={ () => setOpen(true)}
         >
           <Ionicons name="ios-add" size={30} color="#fff"/>
         </Animatablebtn>
@@ -112,18 +133,52 @@ const styles = StyleSheet.create({
     flex:1,
     backgroundColor:'#121d31',
   },
-  
-  headModal:{
+  modalHeader:{
     marginLeft:10,
     marginTop:20,
-    flexBasis: 'row',
+    flexDirection:'row',
+    alignItems: 'center',
     alignContent: 'center',
   },
 
-  titleModal:{
+  modalTitle:{
     marginLeft:15,
-    fontSize: 25,
     color:'#fff',
+    fontSize: 25,
+  }, 
+
+  modalBody:{
+    marginTop:15,
+  },
+
+  input:{
+    fontSize:18,
+    textAlignVertical:'top',
+    color:'#000',
+    backgroundColor:'#fff',
+    marginLeft:10,
+    marginHorizontal:10,
+    marginTop:30,
+    height: 95,
+    padding:10,
+    borderRadius:7,
+  },
+
+  handleAdd:{
+    backgroundColor:'#fff',
+    marginLeft:10,
+    marginRight:10,
+    marginTop:15,
+    padding:15,
+    alignItems:'center',
+    justifyContent:'center',
+    height:40,
+    borderRadius: 7,
+  },
+
+  handleText:{
+    fontSize:20,
+
   },
 
 });
