@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {View, Text, StyleSheet, SafeAreaView, StatusBar, 
-  TouchableOpacity, FlatList, Modal, TextInput, TabBarIOS} from 'react-native';
+  TouchableOpacity, FlatList, Modal, TextInput} from 'react-native';
 
 import { Ionicons} from '@expo/vector-icons';
 import TaskList from './src/components/TaskList';
