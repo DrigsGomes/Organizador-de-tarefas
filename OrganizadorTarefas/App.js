@@ -15,6 +15,7 @@ export default function App (){
   const [open, setOpen] = useState(false);
   const [input, setInput] = useState('');
 
+  // Adicionando tarefas 
   function handleAdd(){
     if(input == '') return;
 
