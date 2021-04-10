@@ -14,9 +14,9 @@ export default function App (){
   const [input, setInput] = useState('');
 
   function handleAdd(){
-    if (input === '') return;
+    if(input == '') return;
 
-    const data = {
+    const data ={
       key: input,
       task: input,
     };
@@ -43,7 +43,7 @@ export default function App (){
   showsHorizontalScrollIndicator={false}
   data={task}
   keyExtractor={ (item) => String(item.key) }
-  renderItem={ ({item})=> <TaskList data={item} /> }
+  renderItem = { ( { item } ) => <TaskList data={item} /> }
   />
 
   {/*Criando modal*/}
@@ -66,7 +66,7 @@ export default function App (){
         autoCorrect={false}
         placeholder =" O que precisa fazer hoje?"
         value={input}
-        onChange={ (texto) => setInput(texto)}
+        onChangeText={ (texto) => setInput(texto)}
         />
 
         <TouchableOpacity style={styles.handleAdd} onPress={handleAdd}>

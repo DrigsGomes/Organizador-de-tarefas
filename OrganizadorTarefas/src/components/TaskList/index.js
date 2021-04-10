@@ -16,7 +16,7 @@ export default function TaskList({data}){
             </TouchableOpacity>
 
             <View>
-                 <Text style={styles.teskText}>{data.task}</Text>
+                 <Text style={styles.teskText}> {data.task} </Text>
             </View>
 
         </Animatable.View>
