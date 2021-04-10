@@ -1,10 +1,12 @@
-import React, {useState} from 'react';
+import React, {useState, useCallback, useEffect} from 'react';
 import {View, Text, StyleSheet, SafeAreaView, StatusBar, 
-  TouchableOpacity, FlatList, Modal, TextInput} from 'react-native';
+  TouchableOpacity, FlatList, Modal, TextInput, } from 'react-native';
 
 import { Ionicons} from '@expo/vector-icons';
 import TaskList from './src/components/TaskList';
 import * as Animatable from 'react-native-animatable';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 
 const Animatablebtn = Animatable.createAnimatableComponent(TouchableOpacity);
 
@@ -26,6 +28,39 @@ export default function App (){
     setInput('');
   }
 
+  // Buscando todas as tarefas ao iniciar o App
+  useEffect (()=>{
+
+    async function loadTasks(){
+      const  taskStorage = await AsyncStorage.getItem('@task');
+
+      if (taskStorage){
+        setTask(JSON.parse(taskStorage));
+      }
+    }
+
+    loadTasks();
+
+  }, []);
+
+  // Salvando caso tenha alguma tarefa alterada
+  useEffect (() => {
+
+    async function saveTasks(){
+      await AsyncStorage.setItem('@task', JSON.stringify(task));
+    }
+
+    saveTasks();
+
+  }, [task]);
+
+
+  const handleDelete = useCallback((data)=> {
+    const find = task.filter(r => r.key !== data.key);
+    setTask(find);
+  })
+
+
 
 
   return(
@@ -43,7 +78,7 @@ export default function App (){
   showsHorizontalScrollIndicator={false}
   data={task}
   keyExtractor={ (item) => String(item.key) }
-  renderItem = { ( { item } ) => <TaskList data={item} /> }
+  renderItem = { ( { item } ) => <TaskList data={item} handleDelete={handleDelete} /> }
   />
 
   {/*Criando modal*/}
